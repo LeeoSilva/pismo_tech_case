@@ -8,6 +8,17 @@ from src.repositories import get_account_by_id, insert_account, insert_transacti
 router = fastapi.APIRouter(tags=["/"])
 
 
+@router.get("/")
+async def root() -> JSONResponse:
+    return JSONResponse(
+        status_code=fastapi.status.HTTP_200_OK,
+        content={
+            "message": "Welcome to the Pismo Tech Case API",
+            "documentation_url": "/api/docs",
+        },
+    )
+
+
 @router.post("/accounts")
 async def create_account(account: CreateAccountRequest) -> JSONResponse:
     new_account = insert_account(account)

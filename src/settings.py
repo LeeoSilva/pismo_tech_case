@@ -4,9 +4,6 @@ import pydantic_settings
 
 
 class Settings(pydantic_settings.BaseSettings):
-    port: int = pydantic.Field(alias="FASTAPI_PORT", default=8000)
-    host: str = pydantic.Field(alias="FASTAPI_HOST", default="0.0.0.0")
-
     db_host: str = pydantic.Field(alias="POSTGRES_HOST", default="host.docker.internal")
     db_port: int = pydantic.Field(alias="POSTGRES_PORT", default=5432)
     db_user: str = pydantic.Field(alias="POSTGRES_USER", default="postgres")
