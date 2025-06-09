@@ -7,10 +7,6 @@ Create Date: 2025-06-09 11:39:50.886962
 """
 
 from typing import Sequence, Union
-import datetime
-from alembic import op
-import slugify
-from src.models import OperationType
 
 
 # revision identifiers, used by Alembic.
@@ -28,14 +24,16 @@ data = [
 
 
 def upgrade() -> None:
-    for description in data:
-        operation_type = OperationType(
-            description=description,
-            slug=slugify.slugify(description, separator="_"),
-            created_at=datetime.datetime.now(datetime.timezone.utc),
-        )
-        operation_type.save()
+    pass
+    # for description in data:
+    #     operation_type = OperationType(
+    #         description=description,
+    #         slug=slugify.slugify(description, separator="_"),
+    #         created_at=str(datetime.datetime.now(datetime.timezone.utc)),
+    #     )
+    #     operation_type.save()
 
 
 def downgrade() -> None:
-    op.execute(f"DELETE FROM {OperationType.__tablename__}")
+    pass
+    # op.execute(f"DELETE FROM {OperationType.__tablename__}")

@@ -2,7 +2,7 @@ import fastapi
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from src.requests import CreateAccountRequest, CreateTransactionRequest
-from src.repositories import get_account_by_id, insert_account
+from src.repositories import get_account_by_id, insert_account, insert_transaction
 
 
 router = fastapi.APIRouter(tags=["/"])
@@ -41,4 +41,11 @@ async def get_account(account_id: int):
 
 @router.post("/transactions")
 async def create_transaction(payload: CreateTransactionRequest):
-    
+    transaction = insert_transaction(payload)
+    json = jsonable_encoder(transaction)
+    return JSONResponse(
+        status_code=fastapi.status.HTTP_201_CREATED,
+        content={
+            "data": json,
+        },
+    )

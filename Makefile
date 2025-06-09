@@ -15,3 +15,6 @@ start:
 
 docker-build: 
 	docker compose up -d 
+
+db_console: 
+	docker exec -it pismo_db bash -c "psql -U postgres -d pismo_tech_case"

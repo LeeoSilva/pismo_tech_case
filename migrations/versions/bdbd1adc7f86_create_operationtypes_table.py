@@ -8,7 +8,7 @@ Create Date: 2025-06-09 09:38:34.779294
 
 from typing import Sequence, Union
 from alembic import op
-import sqlalchemy as sa
+import sqlmodel as sm
 
 
 # revision identifiers, used by Alembic.
@@ -22,21 +22,21 @@ table_name: str = "operation_types"
 def upgrade() -> None:
     op.create_table(
         table_name,
-        sa.Column(
+        sm.Column(
             "id",
-            sa.Integer,
+            sm.Integer,
             primary_key=True,
             autoincrement=True,
             index=True,
             nullable=False,
         ),
-        sa.Column("description", sa.String(), nullable=False),
-        sa.Column("slug", sa.String(), nullable=False, unique=True),
-        sa.Column(
+        sm.Column("description", sm.String(), nullable=False),
+        sm.Column("slug", sm.String(), nullable=False, unique=True),
+        sm.Column(
             "created_at",
-            sa.DateTime,
+            sm.DateTime,
             nullable=False,
-            server_default=sa.func.current_timestamp(),
+            server_default=sm.func.current_timestamp(),
         ),
     )
 

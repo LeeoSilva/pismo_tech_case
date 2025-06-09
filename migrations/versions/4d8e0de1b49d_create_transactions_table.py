@@ -10,7 +10,7 @@ from typing import Sequence, Union
 
 from alembic import op
 from sqlalchemy.sql.functions import current_timestamp
-import sqlalchemy as sa
+import sqlmodel as sm
 
 
 # revision identifiers, used by Alembic.
@@ -24,20 +24,20 @@ table_name: str = "transactions"
 def upgrade() -> None:
     op.create_table(
         table_name,
-        sa.Column(
+        sm.Column(
             "id",
-            sa.Integer,
+            sm.Integer,
             primary_key=True,
             autoincrement=True,
             index=True,
             nullable=False,
         ),
-        sa.Column("account_id", sa.Integer, nullable=False),
-        sa.Column("operation_type_id", sa.Integer, nullable=False),
-        sa.Column("amount", sa.DECIMAL(precision=19, scale=2), nullable=False),
-        sa.Column(
+        sm.Column("account_id", sm.Integer, nullable=False),
+        sm.Column("operation_type_id", sm.Integer, nullable=False),
+        sm.Column("amount", sm.DECIMAL(precision=19, scale=2), nullable=False),
+        sm.Column(
             "created_at",
-            sa.DateTime,
+            sm.DateTime,
             nullable=False,
             server_default=current_timestamp(),
         ),

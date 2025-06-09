@@ -12,6 +12,10 @@ engine = sqlmodel.create_engine(
 
 
 class BaseModel(sqlmodel.SQLModel):
+    created_at: datetime.datetime = sqlmodel.Field(
+        default_factory=lambda: datetime.datetime.now(datetime.timezone.utc), index=True
+    )
+
     def save(self) -> Self:
         """Method to save the model instance to the database."""
         with sqlmodel.Session(engine) as session:
@@ -38,7 +42,7 @@ class Transaction(BaseModel, table=True):
     )
     amount: float = sqlmodel.Field(nullable=False)
     created_at: datetime.datetime = sqlmodel.Field(
-        default_factory=datetime.datetime.now(datetime.timezone.utc), index=True
+        default_factory=lambda: datetime.datetime.now(datetime.timezone.utc), index=True
     )
 
 
@@ -48,7 +52,7 @@ class Account(BaseModel, table=True):
     id: int = sqlmodel.Field(primary_key=True, index=True)
     document_number: str = sqlmodel.Field(nullable=False, unique=True)
     created_at: datetime.datetime = sqlmodel.Field(
-        default_factory=datetime.datetime.now(datetime.timezone.utc), index=True
+        default_factory=lambda: datetime.datetime.now(datetime.timezone.utc), index=True
     )
 
 

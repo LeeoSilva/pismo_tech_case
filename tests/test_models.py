@@ -34,7 +34,7 @@ def test_transaction_save(operation_type: OperationType, account: Account):
     assert found_transaction.account_id == transaction.account_id
     assert found_transaction.operation_type_id == transaction.operation_type_id
     assert found_transaction.amount == transaction.amount
-    assert found_transaction.event_date == transaction.event_date
+    assert found_transaction.created_at == transaction.created_at
 
 
 def test_account_save(account: Account):
@@ -42,6 +42,7 @@ def test_account_save(account: Account):
 
     assert account.id is not None
     assert account.document_number is not None
+    assert account.created_at is not None
 
 
 def test_operation_type_save(operation_type: OperationType):
@@ -50,3 +51,4 @@ def test_operation_type_save(operation_type: OperationType):
     assert operation_type.id is not None
     assert operation_type.description is not None
     assert operation_type.slug is not None
+    assert operation_type.created_at is not None

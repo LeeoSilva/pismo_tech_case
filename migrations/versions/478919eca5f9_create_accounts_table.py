@@ -7,8 +7,8 @@ Create Date: 2025-06-09 09:38:18.041269
 """
 
 from typing import Sequence, Union
+import sqlmodel as sm
 
-import sqlalchemy as sa
 from alembic import op
 
 
@@ -24,20 +24,20 @@ table_name: str = "accounts"
 def upgrade() -> None:
     op.create_table(
         table_name,
-        sa.Column(
+        sm.Column(
             "id",
-            sa.Integer,
+            sm.Integer,
             primary_key=True,
             autoincrement=True,
             index=True,
             nullable=False,
         ),
-        sa.Column("document_number", sa.String(), nullable=False),
-        sa.Column(
+        sm.Column("document_number", sm.String(), nullable=False),
+        sm.Column(
             "created_at",
-            sa.DateTime,
+            sm.DateTime,
             nullable=False,
-            server_default=sa.func.current_timestamp(),
+            server_default=sm.func.current_timestamp(),
         ),
     )
 
