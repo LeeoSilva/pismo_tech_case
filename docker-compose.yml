@@ -1,0 +1,44 @@
+x-extra-hosts: &extra_hosts
+  extra_hosts: 
+    - "host.docker.internal:host-gateway"
+
+volumes: 
+  shared: 
+  db-data: 
+
+services: 
+  pismo_app: 
+    container_name: pismo_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    env_file: 
+      - .env.example
+      - .env
+    volumes: 
+      - .:/var/app
+      - shared:/app/shared
+    ports:
+      - "$FASTAPI_PORT:$FASTAPI_PORT"
+    depends_on:
+      - pismo_db
+    tty: true 
+    stdin_open: true
+    <<: *extra_hosts
+
+  pismo_db: 
+    container_name: pismo_db
+    image: postgres:latest
+    environment: 
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    env_file: 
+      - .env.example
+      - .env
+    ports:
+      - "$POSTGRES_PORT:5432"
+    volumes: 
+      - db-data:/var/lib/postgresql/data
+    <<: *extra_hosts

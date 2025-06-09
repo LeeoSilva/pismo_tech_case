@@ -1,0 +1,22 @@
+{
+    "workspaceFolder": "/var/app",
+    "dockerComposeFile": "../docker-compose.yml",
+    "name": "pismo_tech_case",
+    "service": "pismo_app",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "editor.formatOnSave": true,
+                "[python]": {
+                    "defaultInterpreterPath": "/usr/local/bin/python"
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.isort",
+                "charliermarsh.ruff",
+                "mikestead.dotenv"
+            ]
+        }
+    }
+}
