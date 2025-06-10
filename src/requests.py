@@ -3,6 +3,7 @@ import pydantic
 
 class CreateAccountRequest(pydantic.BaseModel):
     document_number: str
+    account_limit: float
 
 
 class CreateTransactionRequest(pydantic.BaseModel):

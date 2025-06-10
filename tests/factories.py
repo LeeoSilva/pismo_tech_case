@@ -19,6 +19,9 @@ class AccountFactory(factory.Factory):
         model = Account
 
     document_number = factory.Faker("cpf", locale="pt_BR")
+    account_limit = factory.Faker(
+        "pydecimal", left_digits=5, right_digits=2, positive=True
+    )
     created_at = factory.Faker("date_time_this_year", tzinfo=None)
 
 

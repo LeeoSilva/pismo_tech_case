@@ -1,3 +1,4 @@
+import enum
 from typing import Self
 import sqlmodel
 import datetime
@@ -9,6 +10,13 @@ engine = sqlmodel.create_engine(
     url=build_connection_string(),
     echo=True,
 )
+
+
+class OperationTypesEnum(enum.Enum):
+    NORMAL_PURCHASE = 1  # Decrease credit limit
+    INSTALLMENT_PURCHASE = 2  # Decrease credit limit
+    WITHDRAWAL = 3  # Decrease credit limit
+    CREDIT_VOUCHER = 4  # Increase credit limit
 
 
 class BaseModel(sqlmodel.SQLModel):
@@ -51,6 +59,7 @@ class Account(BaseModel, table=True):
 
     id: int = sqlmodel.Field(primary_key=True, index=True)
     document_number: str = sqlmodel.Field(nullable=False, unique=True)
+    account_limit: float = sqlmodel.Field(nullable=False)
     created_at: datetime.datetime = sqlmodel.Field(
         default_factory=lambda: datetime.datetime.now(datetime.timezone.utc), index=True
     )
