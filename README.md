@@ -13,6 +13,13 @@ The project includes a Makefile to simplify common tasks such as running the app
 
 These commands can be executed in the terminal to manage the application and its dependencies easily.
 
+## .Env
+First of all, you need to create a `.env` file in the root directory of the project. You can use the provided `.env.example` file as a template. 
+
+```bash
+cp .env.example .env
+```
+
 ## Poetry 
 The project uses Poetry for dependency management and packaging. Poetry simplifies the process of managing Python packages and their dependencies, ensuring that the application runs with the correct versions of libraries.
 To install the dependencies, run the following command:

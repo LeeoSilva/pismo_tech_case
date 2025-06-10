@@ -8,7 +8,6 @@ def insert_account(account: CreateAccountRequest):
 
 
 def get_account_by_id(account_id: int) -> Account | None:
-    """Retrieve an account by its ID."""
     return Account.find_by_id(account_id)
 
 
